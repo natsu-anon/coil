@@ -1,0 +1,38 @@
+(function_declarator) @decl-0
+(declaration
+ (storage_class_specifier)* @storage-1
+ type: (_) @return-2
+ declarator: (_) @decl-3)
+MATCH 0
+	pattern-0, capture-0: freep(void* p)
+MATCH 1
+	pattern-1, capture-1: static
+	pattern-1, capture-2: int
+	pattern-1, capture-3: gosh
+MATCH 2
+	pattern-1, capture-1: static
+	pattern-1, capture-1: inline
+	pattern-1, capture-2: void
+	pattern-1, capture-3: lmao(void)
+MATCH 3
+	pattern-0, capture-0: lmao(void)
+MATCH 4
+	pattern-1, capture-2: void
+	pattern-1, capture-3: foo(int a)
+MATCH 5
+	pattern-0, capture-0: foo(int a)
+MATCH 6
+	pattern-1, capture-2: void
+	pattern-1, capture-3: *bar(int a)
+MATCH 7
+	pattern-0, capture-0: bar(int a)
+MATCH 8
+	pattern-1, capture-2: bruh
+	pattern-1, capture-3: *guh(int a)
+MATCH 9
+	pattern-0, capture-0: guh(int a)
+MATCH 10
+	pattern-1, capture-2: fam
+	pattern-1, capture-3: lol(int a)
+MATCH 11
+	pattern-0, capture-0: lol(int a)

@@ -1,0 +1,131 @@
+(class_specifier
+ name: (type_identifier) @class-0
+ body: ((field_declaration_list (declaration) @constructor-destructor-1)))
+(function_declarator) @decl-2
+(class_specifier
+ name: (type_identifier) @class-0
+ body: ((field_declaration_list (field_declaration
+								(storage_class_specifier)* @storage-3
+								type: (_) @return-4
+								declarator: [(function_declarator) (pointer_declarator)] @decl-5))))
+(declaration (storage_class_specifier)* @storage-6
+			 type: (_) @return-7
+			 declarator: [(function_declarator) (pointer_declarator)] @decl-8)
+MATCH 0
+	pattern-3, capture-6: static
+	pattern-3, capture-6: inline
+	pattern-3, capture-7: void
+	pattern-3, capture-8: bar(void)
+MATCH 1
+	pattern-1, capture-2: bar(void)
+MATCH 2
+	pattern-3, capture-7: int
+	pattern-3, capture-8: baz(int a, int b=22)
+MATCH 3
+	pattern-1, capture-2: baz(int a, int b=22)
+MATCH 4
+	pattern-0, capture-0: NavigationOctree
+	pattern-0, capture-1: NavigationOctree();
+MATCH 5
+	pattern-1, capture-2: NavigationOctree()
+MATCH 6
+	pattern-0, capture-0: NavigationOctree
+	pattern-0, capture-1: ~NavigationOctree();
+MATCH 7
+	pattern-1, capture-2: ~NavigationOctree()
+MATCH 8
+	pattern-2, capture-0: NavigationOctree
+	pattern-2, capture-4: Octant
+	pattern-2, capture-5: *root
+MATCH 9
+	pattern-2, capture-0: NavigationOctree
+	pattern-2, capture-3: static
+	pattern-2, capture-3: inline
+	pattern-2, capture-4: void
+	pattern-2, capture-5: foo(void)
+MATCH 10
+	pattern-1, capture-2: foo(void)
+MATCH 11
+	pattern-2, capture-0: NavigationOctree
+	pattern-2, capture-4: void
+	pattern-2, capture-5: generate(const godot::Vector3& origin, const godot::Vector3& halfSize, godot::PhysicsDirectSpaceState3D* space, const godot::Vector3& stopSize)
+MATCH 12
+	pattern-1, capture-2: generate(const godot::Vector3& origin, const godot::Vector3& halfSize, godot::PhysicsDirectSpaceState3D* space, const godot::Vector3& stopSize)
+MATCH 13
+	pattern-2, capture-0: NavigationOctree
+	pattern-2, capture-4: bool
+	pattern-2, capture-5: lineOfSight(const godot::Vector3& pos0, const godot::Vector3& pos1) const
+MATCH 14
+	pattern-1, capture-2: lineOfSight(const godot::Vector3& pos0, const godot::Vector3& pos1) const
+MATCH 15
+	pattern-2, capture-0: NavigationOctree
+	pattern-2, capture-4: Octant
+	pattern-2, capture-5: * nearestLeaf(const godot::Vector3& pos, bool& containsPos) const
+MATCH 16
+	pattern-1, capture-2: nearestLeaf(const godot::Vector3& pos, bool& containsPos) const
+MATCH 17
+	pattern-2, capture-0: NavigationOctree
+	pattern-2, capture-4: Octant
+	pattern-2, capture-5: * nearestEmptyLeaf(const godot::Vector3& pos, bool& containsPos) const
+MATCH 18
+	pattern-1, capture-2: nearestEmptyLeaf(const godot::Vector3& pos, bool& containsPos) const
+MATCH 19
+	pattern-2, capture-0: NavigationOctree
+	pattern-2, capture-4: Octant
+	pattern-2, capture-5: ** intersectedOctants(const godot::Vector3& pos0, const godot::Vector3& pos1) const
+MATCH 20
+	pattern-1, capture-2: intersectedOctants(const godot::Vector3& pos0, const godot::Vector3& pos1) const
+MATCH 21
+	pattern-2, capture-0: NavigationOctree
+	pattern-2, capture-4: bool
+	pattern-2, capture-5: intersectsOctant(Octant* octant, const godot::Vector3& pos0, const godot::Vector3& delta) const
+MATCH 22
+	pattern-1, capture-2: intersectsOctant(Octant* octant, const godot::Vector3& pos0, const godot::Vector3& delta) const
+MATCH 23
+	pattern-2, capture-0: NavigationOctree
+	pattern-2, capture-4: godot::Vector3
+	pattern-2, capture-5: nearestPoint(Octant* octant, const godot::Vector3& pos) const
+MATCH 24
+	pattern-1, capture-2: nearestPoint(Octant* octant, const godot::Vector3& pos) const
+MATCH 25
+	pattern-2, capture-0: NavigationOctree
+	pattern-2, capture-4: void
+	pattern-2, capture-5: generateOctree(godot::PhysicsDirectSpaceState3D *space, const godot::Vector3& stopSize)
+MATCH 26
+	pattern-1, capture-2: generateOctree(godot::PhysicsDirectSpaceState3D *space, const godot::Vector3& stopSize)
+MATCH 27
+	pattern-2, capture-0: NavigationOctree
+	pattern-2, capture-4: void
+	pattern-2, capture-5: subdivide(Octant* o, godot::PhysicsShapeQueryParameters3D* query, godot::PhysicsDirectSpaceState3D* space, const godot::Vector3& stopSize)
+MATCH 28
+	pattern-1, capture-2: subdivide(Octant* o, godot::PhysicsShapeQueryParameters3D* query, godot::PhysicsDirectSpaceState3D* space, const godot::Vector3& stopSize)
+MATCH 29
+	pattern-2, capture-0: NavigationOctree
+	pattern-2, capture-4: int
+	pattern-2, capture-5: mergeNonemptyLeaves(Octant* octant, Octant** children) const
+MATCH 30
+	pattern-1, capture-2: mergeNonemptyLeaves(Octant* octant, Octant** children) const
+MATCH 31
+	pattern-2, capture-0: NavigationOctree
+	pattern-2, capture-4: void
+	pattern-2, capture-5: findNeighbors(Octant* o)
+MATCH 32
+	pattern-1, capture-2: findNeighbors(Octant* o)
+MATCH 33
+	pattern-2, capture-0: NavigationOctree
+	pattern-2, capture-4: void
+	pattern-2, capture-5: shallowestNeighbors(Octant* octant, const unsigned char pos0, Queue<Octant*>* res) const
+MATCH 34
+	pattern-1, capture-2: shallowestNeighbors(Octant* octant, const unsigned char pos0, Queue<Octant*>* res) const
+MATCH 35
+	pattern-2, capture-0: NavigationOctree
+	pattern-2, capture-4: void
+	pattern-2, capture-5: deepestNeighbors(Octant* octant, Octant* neighbor, Queue<Octant*>* res, Queue<unsigned char>* dirs) const
+MATCH 36
+	pattern-1, capture-2: deepestNeighbors(Octant* octant, Octant* neighbor, Queue<Octant*>* res, Queue<unsigned char>* dirs) const
+MATCH 37
+	pattern-2, capture-0: NavigationOctree
+	pattern-2, capture-4: void
+	pattern-2, capture-5: leavesFacing(Octant* octant, const unsigned char dir, Queue<Octant*>* res) const
+MATCH 38
+	pattern-1, capture-2: leavesFacing(Octant* octant, const unsigned char dir, Queue<Octant*>* res) const
