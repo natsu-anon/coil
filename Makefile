@@ -8,7 +8,7 @@ TREE_SITTER_OBJ := ts_obj/tree_sitter.o ts_obj/c_parser.o ts_obj/cpp_parser.o ts
 OBJ := $(patsubst src/%.c,obj/%.o,$(SRC)) $(TREE_SITTER_OBJ)
 DEBUG_RELEASE := -ggdb3
 
-.PHONY: test clean compile_commnds obj_dir ts_obj_dir
+.PHONY: default all test clean compile_commnds obj_dir ts_obj_dir
 
 default: coil
 
@@ -44,9 +44,11 @@ obj_dir:
 
 test: coil
 	@echo ATTN: TESTS START
+	${CURDIR}/coil "void foo(void);"
 	${CURDIR}/coil -o test.h
-	${CURDIR}/coil -p -o navigation_octree.hpp 800 1000
+	${CURDIR}/coil -p -o navigation_octree.hpp
 	${CURDIR}/coil -p -o navigation_octree.hpp 1000
+	${CURDIR}/coil -p -o navigation_octree.hpp 800 1000
 	@echo ATTN: TESTS SUCCEEDED
 
 # ${CURDIR}/coil "void *fn(int a); void *gn(int b);"
