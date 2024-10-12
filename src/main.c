@@ -98,7 +98,6 @@ int main(int argc, char** argv)
 			buf = stdout;
 		}
 		char* abs_path = fs_abs_path(in_file);
-		// src = str_file(abs_path, &len);
 		src = file_text(abs_path, &len);
 		free(abs_path);
 		int r0 = 0;
@@ -107,7 +106,7 @@ int main(int argc, char** argv)
 			r0 = atoi(argv[optind]);
 			r0 = 0 > r0 ? 0 : r0;
 		}
-		int r1 = strlen(src);
+		int r1 = len;
 		if (argc > optind + 1)
 		{
 			r1 = atoi(argv[optind + 1]);
