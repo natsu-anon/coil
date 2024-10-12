@@ -10,7 +10,7 @@
 #define DIR_SEPERATOR '\\'
 #define ABS_PATH(BUF, PATH, MAX_LEN) _fullpath(BUF, PATH, MAX_LEN)
 #else /* NOTE: test this */
-#define ABS_PATH(BUF, PATH, MAX_LEN) realpath(BUF, PATH)
+#define ABS_PATH(BUF, PATH, MAX_LEN) realpath(PATH, BUF) // NOTE: args are swapped
 #define DIR_SEPERATOR '/'
 #endif
 
@@ -57,13 +57,22 @@ int fs_split_path(const char *path, char **dir, char **file)
 char* file_text(const char* abs_path, int* out_len)
 {
 	FILE* fp = fopen(abs_path, "r");
-	assertf(fp, "Failed to open file stream for %s.  Does it exist?", abs_path);
-	assertf(fseek(fp, 0, SEEK_END) > 0, "Failed to seek end position for file %s", abs_path);
+	if (!fp)
+	{
+		fprintf(stderr, "failed to open file: %s -- does it exist?", abs_path);
+		exit(EXIT_FAILURE);
+	}
+	else if ((fseek(fp, 0, SEEK_END)) == -1)
+	{
+		fprintf(stderr, "failed to seek to end of file: %s", abs_path);
+		exit(EXIT_FAILURE);
+	}
 	const int fsize = ftell(fp);
 	rewind(fp);
 	char* res = malloc(fsize * sizeof(char));
 	fread(res, sizeof *res, fsize - 1, fp);
 	res[fsize - 1] = '\n';
+	*out_len = fsize - 1;
 	fflush(fp);
 	fclose(fp);
 	return res;
