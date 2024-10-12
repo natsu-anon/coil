@@ -64,6 +64,6 @@ clean-emacs:
 
 compile_commands:
 	make --always-make --dry-run all $(TREE-SITTER_OBJ)\
-	| rg -w $(CC) \
-	| rg -w '\-[co]' \
+	| grep -w $(CC) \
+	| grep -w '\-[co]' \
 	| jq -nR '[inputs|{command:., directory:".", file: match("\\-c [\\w\\-/]+\\.c").string[3:], output: match("\\-o [\\w\\-/]+\\.o").string[3:]}]' > compile_commands.json
