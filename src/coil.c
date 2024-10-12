@@ -53,7 +53,7 @@ char* node_text(const TSNode* n, const char* str)
 
 unsigned char node_unbound(const TSNode* n, const uint32_t r0, const uint32_t r1)
 {
-	return ts_node_start_byte(*n) < r0 | r1 < ts_node_end_byte(*n);
+	return (int)ts_node_start_byte(*n) < r0 | r1 < (int)ts_node_end_byte(*n);
 }
 
 
