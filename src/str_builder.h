@@ -3,6 +3,7 @@
 
 char *join(char** str, const char c, const int len);
 
+// NOTE: stop using this.  use file_sys file_txt -- no buffer memery
 char *str_file(const char* abs_path, int* out_len);
 
 char *sb_start();

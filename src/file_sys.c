@@ -4,6 +4,7 @@
 /* #include <libgen.h> // this is NOT working well */
 #include <string.h>
 #include <limits.h> /* PATH MAX */
+#include "error_macros.h"
 
 #ifdef _WIN32
 #define DIR_SEPERATOR '\\'
@@ -50,4 +51,20 @@ int fs_split_path(const char *path, char **dir, char **file)
 	*dir = NULL;
 	*file = temp;
 	return 0;
+}
+
+// NOTE: use this instead of str_file
+char* file_text(const char* abs_path, int* out_len)
+{
+	FILE* fp = fopen(abs_path, "r");
+	assertf(fp, "Failed to open file stream for %s.  Does it exist?", abs_path);
+	assertf(fseek(fp, 0, SEEK_END) > 0, "Failed to seek end position for file %s", abs_path);
+	const int fsize = ftell(fp);
+	rewind(fp);
+	char* res = malloc(fsize * sizeof(char));
+	fread(res, sizeof *res, fsize - 1, fp);
+	res[fsize - 1] = '\n';
+	fflush(fp);
+	fclose(fp);
+	return res;
 }
