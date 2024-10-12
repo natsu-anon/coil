@@ -98,7 +98,8 @@ int main(int argc, char** argv)
 			buf = stdout;
 		}
 		char* abs_path = fs_abs_path(in_file);
-		src = str_file(abs_path, &len);
+		// src = str_file(abs_path, &len);
+		src = file_text(abs_path, &len);
 		free(abs_path);
 		int r0 = 0;
 		if (argc > optind)
@@ -128,7 +129,7 @@ int main(int argc, char** argv)
 	if (mode & FILEIN)
 	{
 		char* abs_path = fs_abs_path(in_file);
-		src = str_file(abs_path, &len);
+		src = file_text(abs_path, &len);
 		free(abs_path);
 	}
 	else
