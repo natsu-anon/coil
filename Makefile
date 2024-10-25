@@ -48,7 +48,7 @@ clean-ts:
 clean-emacs:
 	rm -rf *~ src/*~
 
-install: all
+install: coil
 	@echo "installing coil to $(DESTDIR)$(PREFIX)bin..."
 	@mkdir -p $(DESTDIR)$(PREFIX)bin
 	@cp -p coil $(DESTIDR)$(PREFIX)bin/coil
