@@ -1,25 +1,22 @@
 # NOTE: compile with -s to get it REAL small for release
 # NOTE: cpp parser is NOT behaving WELL
 CC := clang
-CFLAGS := -Wall -Wextra
+CFLAGS := -Wall -Wextra -ggdb3 -O2
 TREE-SITTER_INCLUDES = -I tree-sitter/lib/include -I tree-sitter/lib/src
 SRC := $(wildcard src/*.c)
 TREE_SITTER_OBJ := ts_obj/tree_sitter.o ts_obj/c_parser.o ts_obj/cpp_parser.o ts_obj/cpp_scanner.o
 OBJ := $(patsubst src/%.c,obj/%.o,$(SRC)) $(TREE_SITTER_OBJ)
-DEBUG_RELEASE := -ggdb3
 
-.PHONY: default all test clean compile_commnds obj_dir ts_obj_dir
+PREFIX ?= /usr/local/
+
+.PHONY: default all test clean compile_commnds obj_dir ts_obj_dir install
 
 default: coil
 
 all: coil
 
-release: $(OBJ)
-	$(CC) $(CFLAGS) $(TREE-SITTER_INCLUDES) -o coil $^ -s -O3
-
-
 coil: $(OBJ)
-	$(CC) $(CFLAGS) $(TREE-SITTER_INCLUDES) -o $@ $^ $(DEBUG_RELEASE)
+	$(CC) $(CFLAGS) $(TREE-SITTER_INCLUDES) -o $@ $^
 
 ts_obj/tree_sitter.o: | ts_obj_dir
 	$(CC) $(CFLAGS) $(TREE-SITTER_INCLUDES) -c tree-sitter/lib/src/lib.c -o $@
@@ -37,26 +34,13 @@ obj/%.o: src/%.c | obj_dir
 	$(CC) $(CFLAGS) -c $^ -o $@ $(DEBUG_RELEASE)
 
 ts_obj_dir:
-	mkdir -p ts_obj
+	@mkdir -p ts_obj
 
 obj_dir:
-	mkdir -p obj
-
-test: coil
-	@echo ATTN: TESTS START
-	${CURDIR}/coil "void foo(void);"
-	${CURDIR}/coil -o test.h
-	${CURDIR}/coil -p -o navigation_octree.hpp
-	${CURDIR}/coil -p -o navigation_octree.hpp 1000
-	${CURDIR}/coil -p -o navigation_octree.hpp 800 1000
-	@echo ATTN: TESTS SUCCEEDED
-
-# ${CURDIR}/coil "void *fn(int a); void *gn(int b);"
-# ${CURDIR}/coil void fn\(int a\)\;
-# ${CURDIR}/coil "void fn(void); void gn(void);"
+	@mkdir -p obj
 
 clean:
-	rm -rf obj/*.o *.exe NUL src/NUL
+	rm -rf obj/*.o coil coil.exe NUL src/NUL
 
 clean-ts:
 	rm -rf ts_obj/*.o
@@ -64,8 +48,20 @@ clean-ts:
 clean-emacs:
 	rm -rf *~ src/*~
 
+install: all
+	@echo "installing coil to $(DESTDIR)$(PREFIX)bin..."
+	@mkdir -p $(DESTDIR)$(PREFIX)bin
+	@cp -p coil $(DESTIDR)$(PREFIX)bin/coil
+	@chmod 755 $(DESTDIR)$(PREFIX)bin/coil
+	@echo "Done!"
+
+uninstall:
+	@echo "uninstalling coil to $(DESTDIR)$(PREFIX)bin..."
+	@rm -rfv $(DESTDIR)$(PREFIX)bin/coil
+	@echo "Done!"
+
 compile_commands:
-	make --always-make --dry-run all $(TREE-SITTER_OBJ)\
+	@make --always-make --dry-run all $(TREE-SITTER_OBJ)\
 	| grep -w $(CC) \
 	| grep -w '\-[co]' \
 	| jq -nR '[inputs|{command:., directory:".", file: match("\\-c [\\w\\-/]+\\.c").string[3:], output: match("\\-o [\\w\\-/]+\\.o").string[3:]}]' > compile_commands.json

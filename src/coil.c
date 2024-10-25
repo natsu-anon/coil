@@ -85,7 +85,7 @@ void coil_define_c(FILE *buf, const char *src, const int len)
 	int b0;
 	int b1;
 	TSNode node;
-	unsigned char first = 1;
+	// unsigned char first = 1;
 	while (ts_query_cursor_next_match(cursor, &match))
 	{
 		node = match.captures[0].node;
@@ -109,15 +109,15 @@ void coil_define_c(FILE *buf, const char *src, const int len)
 		char decl[b1 - b0 + 1];
 		strncpy(&decl[0], src + b0, b1 - b0);
 		decl[b1 - b0] = '\0';
-		if (first)
-		{
-			fprintf(buf, "%s\n{\n\t/* TODO */\n}\n", decl);
-			first = 0;
-		}
-		else
-		{
-			fprintf(buf, "\n%s\n{\n\t/* TODO */\n}\n", decl);
-		}
+		// if (first)
+		// {
+		// 	fprintf(buf, "%s\n{\n\t/* TODO */\n}\n", decl);
+		// 	first = 0;
+		// }
+		// else
+		// {
+		fprintf(buf, "\n%s\n{\n\t/* TODO */\n}\n", decl);
+		// }
 	}
 	ts_query_cursor_delete(cursor);
 	ts_query_delete(subquery);
@@ -140,7 +140,7 @@ void coil_define_cpp(FILE *buf, const char *src, const int len, const uint32_t r
 	int b0;
 	int b1;
 	TSNode node;
-	unsigned char first = 1;
+	// unsigned char first = 1;
 	while (ts_query_cursor_next_match(cursor, &match))
 	{
 		/* im not using a switch because I want the frames */
@@ -165,14 +165,14 @@ void coil_define_cpp(FILE *buf, const char *src, const int len, const uint32_t r
 			free(temp);
 			node = match.captures[1].node;
 			char* class_decl = node_text(&node, src);
-			if (first)
-			{
-				fprintf(buf, "%s::%s\n{\n\t/* TODO */\n}\n", class_str, class_decl);
-				first = 0;
-			}
-			else {
-				fprintf(buf, "\n%s::%s\n{\n\t/* TODO */\n}\n", class_str, class_decl);
-			}
+			// if (first)
+			// {
+			// 	fprintf(buf, "%s::%s\n{\n\t/* TODO */\n}\n", class_str, class_decl);
+			// 	first = 0;
+			// }
+			// else {
+			fprintf(buf, "\n%s::%s\n{\n\t/* TODO */\n}\n", class_str, class_decl);
+			// }
 			free(class_str);
 			free(class_decl);
 		}
@@ -186,14 +186,14 @@ void coil_define_cpp(FILE *buf, const char *src, const int len, const uint32_t r
 			char* class_str = node_text(&node, src);
 			node = match.captures[1].node;
 			char* class_decl = node_text(&node, src);
-			if (first)
-			{
-				fprintf(buf, "%s::%s\n{\n\t/* TODO */\n}\n", class_str, class_decl);
-				first = 0;
-			}
-			else {
-				fprintf(buf, "\n%s::%s\n{\n\t/* TODO */\n}\n", class_str, class_decl);
-			}
+			// if (first)
+			// {
+			// 	fprintf(buf, "%s::%s\n{\n\t/* TODO */\n}\n", class_str, class_decl);
+			// 	first = 0;
+			// }
+			// else {
+			fprintf(buf, "\n%s::%s\n{\n\t/* TODO */\n}\n", class_str, class_decl);
+			// }
 			free(class_str);
 			free(class_decl);
 		}
@@ -228,14 +228,14 @@ void coil_define_cpp(FILE *buf, const char *src, const int len, const uint32_t r
 			char ret[b1 - b0 + 1];
 			strncpy(&ret[0], src + b0, b1 - b0);
 			ret[b1 - b0] = '\0';
-			if (first)
-			{
-				fprintf(buf, "%s %s::%s\n{\n\t/* TODO */\n}\n", ret, class_str, sig);
-				first = 0;
-			}
-			else {
-				fprintf(buf, "\n%s %s::%s\n{\n\t/* TODO */\n}\n", ret, class_str, sig);
-			}
+			// if (first)
+			// {
+			// 	fprintf(buf, "%s %s::%s\n{\n\t/* TODO */\n}\n", ret, class_str, sig);
+			// 	first = 0;
+			// }
+			// else {
+			fprintf(buf, "\n%s %s::%s\n{\n\t/* TODO */\n}\n", ret, class_str, sig);
+			// }
 			free(class_str);
 		}
 		else // C-style func declaration
@@ -265,15 +265,15 @@ void coil_define_cpp(FILE *buf, const char *src, const int len, const uint32_t r
 			char decl[b1 - b0 + 1];
 			strncpy(&decl[0], src + b0, b1 - b0);
 			decl[b1 - b0] = '\0';
-			if (first)
-			{
-				fprintf(buf, "%s\n{\n\t/* TODO */\n}\n", decl);
-				first = 0;
-			}
-			else
-			{
-				fprintf(buf, "\n%s\n{\n\t/* TODO */\n}\n", decl);
-			}
+			// if (first)
+			// {
+			// 	fprintf(buf, "%s\n{\n\t/* TODO */\n}\n", decl);
+			// 	first = 0;
+			// }
+			// else
+			// {
+			fprintf(buf, "\n%s\n{\n\t/* TODO */\n}\n", decl);
+			// }
 		}
 	}
 	ts_query_delete(subquery);

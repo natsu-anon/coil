@@ -40,6 +40,21 @@ void include_header(FILE* buf, char* in_file, unsigned char c_mode)
 	free(file);
 }
 
+void print_help(void)
+{
+	printf("coil is a tool that defines C function declarations using tree-sitter.\n");
+	printf("Since it uses tree-sitter it is particularly strict--don't forget your semicolons!\n");
+	printf("USAGE:\n\n");
+	printf("    coil [options] [funciton definition(s) or byte-range to parse]\n\n");
+	printf("OPTIONS:\n");
+	printf("    -o <origin>       = Parse origin file.  Use alongside -p for C++.  If unused, \n");
+	printf("                        coil parses non-optional arguments for C functions.\n");
+	printf("    -i                = Also include the appropriate header (ONLY WORKS WITH -o)\n");
+	printf("    -p                = Treat origin file as C++ instead of C (ONLY WORKS WITH -o).\n");
+	printf("                        Selectively parse a C++ file by passing in a bit range.\n");
+	printf("    -c <destination>  = Write to destination file instead of printing to stdout.\n");
+	printf("    -h                = Prints usage information\n");
+}
 
 int main(int argc, char** argv)
 {
@@ -52,7 +67,7 @@ int main(int argc, char** argv)
 		switch(c)
 		{
 		case 'h':
-			printf("coil is a tool that defines C function declarations using tree-sitter.");
+			print_help();
 			return 0;
 		case 'i':
 			mode |= INCLUDE_HEADER;
