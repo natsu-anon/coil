@@ -8,6 +8,18 @@ git submodule update
 
 ```
 
+## BUILDING
+You can build from source using the Makefile!
+
+```bash
+make
+make install
+```
+
+## DOWNLOADS
+
+SOON (tm)
+
 ## USAGE
 
 You _really_ should be using `coil` via a wrapper for your text-editor.
