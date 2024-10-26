@@ -1,4 +1,5 @@
 *obj/
+cross_compiled/
 *~
 coil
 *.exe
